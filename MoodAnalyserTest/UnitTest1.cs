@@ -19,15 +19,34 @@ namespace MoodAnalyserTest
         }
 
         [TestMethod]
-        public void TestAnalyseMood_Should_return_HAPPY_When_given_null()
+        public void TestAnalyseMood_Should_return_CustomNullMsgException_When_given_null()
         {
-            //Arrange
-            string message = null;
-            MoodAnalyserClass mood = new MoodAnalyserClass(message);
-            //Act
-            string result = mood.AnalyseMood();
-            //Assert
-            Assert.AreEqual(result, "HAPPY");
+            try
+            {
+                string message = null;
+                MoodAnalyserClass mood = new MoodAnalyserClass(message);
+
+                mood.AnalyseMood();
+            }
+            catch (MoodAnalysisException m)
+            {
+                Assert.AreEqual("Message should not be null", m.Message);
+            }
+        }
+        [TestMethod]
+        public void TestAnalyseMood_Should_return_CustomEmptyMsgException_When_given_empty()
+        {
+            try
+            {
+                string message = "";
+                MoodAnalyserClass mood = new MoodAnalyserClass(message);
+
+                mood.AnalyseMood();
+            }
+            catch (MoodAnalysisException m)
+            {
+                Assert.AreEqual("Message should not be empty", m.Message);
+            }
         }
     }
 }

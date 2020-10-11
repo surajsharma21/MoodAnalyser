@@ -2,13 +2,21 @@
 
 namespace MoodAnalyser
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            string mood = "I am very Happy";
-            MoodAnalyserClass moodAnalyser = new MoodAnalyserClass(mood);
-            System.Console.WriteLine(moodAnalyser.AnalyseMood());
+            try
+            {
+                string mood = Console.ReadLine();
+                MoodAnalyserClass moodAnalyser = new MoodAnalyserClass(mood);
+                string result = moodAnalyser.AnalyseMood();
+                Console.WriteLine(result);
+            }
+            catch (MoodAnalysisException m)
+            {
+                Console.WriteLine(m.Message);
+            }
         }
     }
 }
