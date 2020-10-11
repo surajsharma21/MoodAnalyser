@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoodAnalyser;
 
-
 namespace MoodAnalyserTest
 {
     [TestClass]
@@ -20,10 +19,10 @@ namespace MoodAnalyserTest
         }
 
         [TestMethod]
-        public void TestAnalyseMood_Should_return_HAPPY()
+        public void TestAnalyseMood_Should_return_HAPPY_When_given_null()
         {
             //Arrange
-            string message = "I am in Happy Mood";
+            string message = null;
             MoodAnalyserClass mood = new MoodAnalyserClass(message);
             //Act
             string result = mood.AnalyseMood();
