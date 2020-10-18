@@ -90,5 +90,55 @@ namespace MoodAnalyserTest
                 Assert.AreEqual("constructor not found", e.Message);
             }
         }
+        [TestMethod]
+        public void Given_MoodAnalyser_Class_Name_Should_Return_MoodAnalyser_Object_Using_Parametrized_Constructor()
+        {
+
+            //Arrange
+            string className = "MoodAnalyser.MoodAnalyserClass";
+            string constructorName = "MoodAnalyserClass";
+            MoodAnalyserClass expectedObj = new MoodAnalyserClass("HAPPY");
+            //Act
+            object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+            //Assert
+            expectedObj.Equals(resultObj);
+        }
+
+        [TestMethod]
+        public void Given_Improper_Class_Name_Should_Throw_MoodAnalysisException_For_Parameterized_Constructor()
+        {
+            try
+            {
+                //Arrange
+                string className = "WrongNameSpace.MoodAnalyser";
+                string constructorName = "MoodAnalyser";
+                MoodAnalyserClass expectedObj = new MoodAnalyserClass("HAPPY");
+                //Act
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+            }
+            catch (MoodAnalysisException e)
+            {
+                //Assert
+                Assert.AreEqual("class not found", e.Message);
+            }
+        }
+        [TestMethod]
+        public void Given_Improper_Constructor_Name_Should_Throw_MoodAnalysisException_For_Parameterized_Constructor()
+        {
+            try
+            {
+                //Arrange
+                string className = "MoodAnalyser.MoodAnalyserClass";
+                string constructorName = "WrongConstructorName";
+                MoodAnalyserClass expectedObj = new MoodAnalyserClass("HAPPY");
+                //Act
+                object resultObj = MoodAnalyserFactory.CreateMoodAnalyserObjectUsingParametzisedConstructor(className, constructorName);
+            }
+            catch (MoodAnalysisException e)
+            {
+                //Assert
+                Assert.AreEqual("constructor not found", e.Message);
+            }
+        }
     }
 }
